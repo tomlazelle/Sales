@@ -16,21 +16,39 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Web.Http;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Sales.Api.App_Start;
 using Sales.Api.DependencyResolution;
-using WebActivator;
+using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(StructuremapMvc), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(StructuremapMvc), "End")]
 
 namespace Sales.Api.App_Start
 {
     public static class StructuremapMvc
     {
+        #region Public Properties
+
+        public static StructureMapDependencyScope StructureMapDependencyScope { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public static void End()
+        {
+            StructureMapDependencyScope.Dispose();
+        }
+
         public static void Start()
         {
             var container = IoC.Initialize();
-
-            GlobalConfiguration.Configuration.DependencyResolver = new StructureMapDependencyResolver(container);
+            StructureMapDependencyScope = new StructureMapDependencyScope(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new StructureMapWebApiDependencyResolver(container);
+            DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
         }
+
+        #endregion
     }
 }

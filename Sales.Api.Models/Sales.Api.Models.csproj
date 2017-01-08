@@ -56,7 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AddressModel.cs" />
+    <Compile Include="CustomerReturnModel.cs" />
+    <Compile Include="Enrichers\CustomerReturnEnricher.cs" />
+    <Compile Include="Enrichers\OrderItemEnricher.cs" />
+    <Compile Include="Enrichers\SalesOrderCreatedEnricher.cs" />
+    <Compile Include="OrderItemModel.cs" />
+    <Compile Include="PersonModel.cs" />
+    <Compile Include="SalesOrderCreatedModel.cs" />
+    <Compile Include="SalesOrderModel.cs" />
     <Compile Include="Configuration\ModelRegistry.cs" />
     <Compile Include="Handlers\DefaultLink.cs" />
     <Compile Include="Handlers\EditLink.cs" />
@@ -71,12 +79,16 @@
     <Compile Include="Handlers\SelfLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enrichers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesOrder.Common\Sales.Common.csproj">
+      <Project>{34C2534E-F752-45CE-9A31-7A9ED565F571}</Project>
+      <Name>Sales.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,7 +19,7 @@ namespace Sales.Api.Handlers
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            _container.Inject(new UrlHelper(request));
+            _container.Inject(typeof(UrlHelper), new UrlHelper(request));
 
             return base.SendAsync(request, cancellationToken)
                 .ContinueWith(task =>

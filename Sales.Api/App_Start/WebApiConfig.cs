@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Sales.Api.Handlers;
 
 namespace Sales.Api
 {
@@ -11,14 +9,10 @@ namespace Sales.Api
         {
             // Web API configuration and services
 
+            var handler = (EnrichingHandler) GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(EnrichingHandler));
+            config.MessageHandlers.Add(handler);
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
         }
     }
 }

@@ -14,19 +14,20 @@ namespace Sales.Domain.Configuration
     {
         public DomainRegistry()
         {
-            For<IDocumentStore>().Singleton().Use(x => CreateNewStore(x));
+            For<ITypeActivator>().Use<TypeActivator>();
+            For<IRavenDbConnection>().Use<RavenDbConnection>();            
             ForConcreteType<SalesOrderHandler>();
             For<IEventStore>().Use<RavenDBEventStore>();
-
-
+            For<IEventPublisher>().Use<DummyPublisher>();
+            For<IDocumentStore>().Singleton().Use(x => CreateNewStore(x.GetInstance<IRavenDbConnection>()));
         }
 
-        private IDocumentStore CreateNewStore(IContext context)
+        private IDocumentStore CreateNewStore(IRavenDbConnection context)
         {
             var store = new DocumentStore
             {
-                DefaultDatabase = "Sales",
-                Url = context.GetInstance<IConfigMgr>().Get<string>("SalesDb")
+                DefaultDatabase = context.DefaultDatabase,
+                Url = context.Url
             }.Initialize();
 
 

@@ -71,6 +71,8 @@
     <Compile Include="Aggregates\Person.cs" />
     <Compile Include="Aggregates\SalesOrder.cs" />
     <Compile Include="Configuration\DomainRegistry.cs" />
+    <Compile Include="Configuration\RavenDbConnection.cs" />
+    <Compile Include="Configuration\IRavenDbConnection.cs" />
     <Compile Include="EventStores\RavenDBEventStore.cs" />
     <Compile Include="Events\AddReturnNoteEvent.cs" />
     <Compile Include="Events\CreateOrderItemEvent.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Events\UpdateSalesOrderStatusEvent.cs" />
     <Compile Include="Handlers\SalesOrderEvents.cs" />
     <Compile Include="Handlers\SalesOrderHandler.cs" />
+    <Compile Include="Handlers\SalesOrderQueryHandler.cs" />
     <Compile Include="Messages\AddressMessage.cs" />
     <Compile Include="Messages\AddReturnNoteMessage.cs" />
     <Compile Include="Messages\CreateReturnMessage.cs" />

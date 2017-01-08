@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IoC.cs" company="Web Advanced">
+// <copyright file="DefaultRegistry.cs" company="Web Advanced">
 // Copyright 2012 Web Advanced (www.webadvanced.com)
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,16 +15,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-using Sales.Api.Common;
+using StructureMap;
 
 namespace Sales.Api.DependencyResolution {
-    using StructureMap;
+    using StructureMap.Configuration.DSL;
+    using StructureMap.Graph;
 	
-    public static class IoC {
-        public static IContainer Initialize()
-        {
-            return Bootstrap.Init();
+    public class DefaultRegistry : Registry {
+        #region Constructors and Destructors
+
+        public DefaultRegistry() {
+            Scan(
+                scan => {
+                    scan.TheCallingAssembly();
+                    scan.WithDefaultConventions();
+                });
+            //For<IExample>().Use<Example>();
         }
+
+        #endregion
     }
 }

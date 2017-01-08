@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IoC.cs" company="Web Advanced">
+// <copyright file="StructureMapWebApiDependencyScope.cs" company="Web Advanced">
 // Copyright 2012 Web Advanced (www.webadvanced.com)
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,16 +15,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http.Dependencies;
+using Microsoft.Practices.ServiceLocation;
+using StructureMap;
 
-using Sales.Api.Common;
-
-namespace Sales.Api.DependencyResolution {
-    using StructureMap;
-	
-    public static class IoC {
-        public static IContainer Initialize()
-        {
-            return Bootstrap.Init();
+namespace Sales.Api.DependencyResolution
+{
+    /// <summary>
+    /// The structure map web api dependency scope.
+    /// </summary>
+    public class StructureMapWebApiDependencyScope : StructureMapDependencyScope, IDependencyScope
+    {
+        public StructureMapWebApiDependencyScope(IContainer container)
+            : base(container) {
         }
     }
 }

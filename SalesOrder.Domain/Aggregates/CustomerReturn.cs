@@ -28,7 +28,7 @@ namespace Sales.Domain.Aggregates
         private List<string> _notes = new List<string>();
 
         public string ReturnId { get; }
-        public int Id { get; }
+        public int Id { get; } //index id
         public decimal Amount { get; }
         public int Quantity { get; }
         public string Sku { get; }
