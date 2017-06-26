@@ -25,24 +25,24 @@ namespace Sales.Domain.Aggregates
 
         private void ReturnNoteAdded(AddReturnNoteEvent addReturnNoteEvent)
         {
-            var claim = _returns.FirstOrDefault(x => x.ReturnId == addReturnNoteEvent.ReturnId);
+            var customerReturn = _returns.FirstOrDefault(x => x.ReturnId == addReturnNoteEvent.ReturnId);
 
-            _returns.Remove(claim);
+            _returns.Remove(customerReturn);
 
-            var notes = claim.Notes.ToList();
+            var notes = customerReturn.Notes.ToList();
 
             notes.Add(addReturnNoteEvent.Note);
 
-            _returns.Add(new CustomerReturn(claim.Id,
-                claim.Amount,
-                claim.Quantity,
-                claim.Sku,
-                claim.Reason,
-                claim.Action,
+            _returns.Add(new CustomerReturn(customerReturn.Id,
+                customerReturn.Amount,
+                customerReturn.Quantity,
+                customerReturn.Sku,
+                customerReturn.Reason,
+                customerReturn.Action,
                 notes.ToList(),
-                claim.ReturnDate,
-                claim.ReturnId,
-                claim.Status));
+                customerReturn.ReturnDate,
+                customerReturn.ReturnId,
+                customerReturn.Status));
         }
 
         public SalesOrder(Guid id, SalesOrderEvents eventItems)

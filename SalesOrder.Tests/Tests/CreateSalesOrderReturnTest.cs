@@ -8,7 +8,7 @@ using Should;
 
 namespace Sales.Tests.Tests
 {
-    public class CreateSalesOrderReturnTest:Subject<SalesOrderHandler>
+    public class CreateSalesOrderReturnTest : Subject<SalesOrderHandler>
     {
         public override void FixtureSetup(IFixture fixture)
         {
@@ -16,13 +16,14 @@ namespace Sales.Tests.Tests
             RegisterDatabase();
         }
 
-        public void can_add_a_claim(){
+        public void can_add_a_customer_return()
+        {
             var createSalesOrder = _fixture.Create<CreateSalesOrderMessage>();
             var salesOrder = Sut.Handle(createSalesOrder);
             var createReturnMessage = _fixture.Build<CreateReturnMessage>()
                 .With(x => x.Id, salesOrder.Id)
                 .With(x => x.Sku, salesOrder.Items.First().Sku)
-                .With(x => x.Amount, salesOrder.Items.First().RetailPrice*salesOrder.Items.First().Quantity)
+                .With(x => x.Amount, salesOrder.Items.First().RetailPrice * salesOrder.Items.First().Quantity)
                 .With(x => x.Quantity, salesOrder.Items.First().Quantity)
                 .With(x => x.Action, ReturnAction.Reprint)
                 .With(x => x.Reason, ReturnReasons.CustomerUnhappy)
