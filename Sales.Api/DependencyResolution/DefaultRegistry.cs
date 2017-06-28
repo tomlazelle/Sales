@@ -15,8 +15,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using StructureMap;
-
 namespace Sales.Api.DependencyResolution {
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
@@ -29,6 +27,7 @@ namespace Sales.Api.DependencyResolution {
                 scan => {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
+					scan.With(new ControllerConvention());
                 });
             //For<IExample>().Use<Example>();
         }

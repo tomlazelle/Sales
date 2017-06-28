@@ -16,15 +16,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-using Sales.Api.Common;
-
 namespace Sales.Api.DependencyResolution {
     using StructureMap;
 	
     public static class IoC {
-        public static IContainer Initialize()
-        {
-            return Bootstrap.Init();
+        public static IContainer Initialize() {
+            return new Container(c => c.AddRegistry<DefaultRegistry>());
         }
     }
 }
