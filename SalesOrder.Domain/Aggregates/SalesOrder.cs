@@ -45,9 +45,10 @@ namespace Sales.Domain.Aggregates
                 claim.Status));
         }
 
-        public SalesOrder(Guid id, SalesOrderEvents eventItems)
-            : this(id)
+        public SalesOrder(Guid id, SalesOrderEvents eventItems) : this(id)
         {
+            if (eventItems == null) return;
+
             LoadEvents(eventItems.Events);
         }
 

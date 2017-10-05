@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EventSource.Framework, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EventSource.Framework.0.1.7\lib\net45\EventSource.Framework.dll</HintPath>
       <Private>True</Private>
@@ -84,6 +87,7 @@
     <Compile Include="Configuration\TestConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AddReturnNoteTest.cs" />
+    <Compile Include="Tests\CreateMinimalSalesOrderTest.cs" />
     <Compile Include="Tests\CreateSalesOrderReturnTest.cs" />
     <Compile Include="Tests\CreateSalesOrderTest.cs" />
     <Compile Include="Tests\UpdateReturnStatusTest.cs" />

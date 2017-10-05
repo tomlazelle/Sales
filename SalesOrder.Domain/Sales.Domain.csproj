@@ -30,9 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="EventSource.Framework, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EventSource.Framework.0.1.7\lib\net45\EventSource.Framework.dll</HintPath>
@@ -73,6 +72,7 @@
     <Compile Include="Configuration\DomainRegistry.cs" />
     <Compile Include="Configuration\RavenDbConnection.cs" />
     <Compile Include="Configuration\IRavenDbConnection.cs" />
+    <Compile Include="Configuration\SalesOrderHandlerMapProfile.cs" />
     <Compile Include="EventStores\RavenDBEventStore.cs" />
     <Compile Include="Events\AddReturnNoteEvent.cs" />
     <Compile Include="Events\CreateOrderItemEvent.cs" />

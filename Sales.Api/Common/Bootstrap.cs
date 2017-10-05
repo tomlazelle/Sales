@@ -28,7 +28,12 @@ namespace Sales.Api.Common
 
         public static IMapper SetupAutoMapper()
         {
-            return new MapperConfiguration(x => x.AddProfiles(typeof(Bootstrap).Assembly)).CreateMapper();
+            return new MapperConfiguration(x =>
+                {
+                    x.AddProfiles(typeof(Bootstrap).Assembly);
+                    x.AddProfiles(typeof(SalesOrderHandler));
+                }
+            ).CreateMapper();
         }
 
         public static IContainer IoC()

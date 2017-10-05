@@ -1,5 +1,7 @@
-﻿using Ploeh.AutoFixture;
+﻿using AutoMapper;
+using Ploeh.AutoFixture;
 using Sales.Common;
+using Sales.Domain.Configuration;
 using Sales.Domain.Handlers;
 using Sales.Domain.Messages;
 using Sales.Tests.Configuration;
@@ -14,6 +16,7 @@ namespace Sales.Tests.Tests
             base.FixtureSetup(fixture);
 
             RegisterDatabase();
+            Register(new MapperConfiguration(x => x.AddProfile(new SalesOrderHandlerMapProfile())).CreateMapper());
         }
 
         public void can_update_sales_order_status(){
