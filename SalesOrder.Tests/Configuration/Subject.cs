@@ -53,7 +53,7 @@ namespace Sales.Tests.Configuration
         {
             var _store = new DocumentStore
             {
-                Url = "http://localhost:8080/", // server URL
+                Url = "http://localhost:8081/", // server URL
                 DefaultDatabase = "EventSource",
                 //                RunInMemory = true,
             };

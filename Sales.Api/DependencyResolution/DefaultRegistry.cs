@@ -15,21 +15,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using StructureMap;
-
 namespace Sales.Api.DependencyResolution {
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
 	
-    public class DefaultRegistry : Registry {
+    public class DefaultRegistry : StructureMap.Registry {
         #region Constructors and Destructors
 
         public DefaultRegistry() {
-            Scan(
-                scan => {
-                    scan.TheCallingAssembly();
-                    scan.WithDefaultConventions();
-                });
+//            Scan(
+//                scan => {
+//                    scan.TheCallingAssembly();
+//                    scan.WithDefaultConventions();
+//					scan.With(new ControllerConvention());
+//                });
             //For<IExample>().Use<Example>();
         }
 

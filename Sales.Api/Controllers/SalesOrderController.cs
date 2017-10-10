@@ -46,9 +46,9 @@ namespace Sales.Api.Controllers
         [Route]
         public IEnumerable<SalesOrderModel> Get(int pageIndex, int itemsPerPage)
         {
-            var SalesOrders = _salesOrderQueryHandler.Get(pageIndex, itemsPerPage);
+            var salesOrders = _salesOrderQueryHandler.Get(pageIndex, itemsPerPage);
 
-            var result = _mapper.Map<IEnumerable<SalesOrder>, IEnumerable<SalesOrderModel>>(SalesOrders);
+            var result = _mapper.Map<IEnumerable<SalesOrder>, IEnumerable<SalesOrderModel>>(salesOrders);
 
             return result;
         }
@@ -56,9 +56,9 @@ namespace Sales.Api.Controllers
         [Route("id")]
         public SalesOrderModel Get(Guid id)
         {
-            var SalesOrders = _salesOrderQueryHandler.Get(id);
+            var salesOrders = _salesOrderQueryHandler.Get(id);
 
-            var result = _mapper.Map<SalesOrder, SalesOrderModel>(SalesOrders);
+            var result = _mapper.Map<SalesOrder, SalesOrderModel>(salesOrders);
 
             return result;
         }
