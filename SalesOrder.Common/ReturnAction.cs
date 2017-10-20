@@ -1,4 +1,4 @@
-﻿namespace Sales.Common
+﻿namespace SalesOrder.Common
 {
     public enum ReturnAction
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using EventSource.Framework;
 
-namespace Sales.Domain.Events
+namespace SalesOrder.Domain.Events
 {
     public class AddReturnNoteEvent:VersionedEvent<Guid>
     {

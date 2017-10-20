@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Sales.Domain.Aggregates
+namespace SalesOrder.Domain.Aggregates
 {
     public class OrderItem
     {

@@ -1,6 +1,6 @@
 ﻿using EventSource.Framework;
 
-namespace Sales.Common
+namespace SalesOrder.Common
 {
     public class DummyPublisher : IEventPublisher
     {

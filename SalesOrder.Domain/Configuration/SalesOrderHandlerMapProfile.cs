@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Sales.Domain.Aggregates;
-using Sales.Domain.Events;
-using Sales.Domain.Messages;
+using SalesOrder.Domain.Aggregates;
+using SalesOrder.Domain.Events;
+using SalesOrder.Domain.Messages;
 
-namespace Sales.Domain.Configuration
+namespace SalesOrder.Domain.Configuration
 {
     public class SalesOrderHandlerMapProfile : Profile
     {

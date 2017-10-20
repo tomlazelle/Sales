@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Sales.Common;
+using SalesOrder.Common;
 
-namespace Sales.Domain.Aggregates
+namespace SalesOrder.Domain.Aggregates
 {
     public class CustomerReturn
     {
@@ -25,7 +24,7 @@ namespace Sales.Domain.Aggregates
             Status = status;
         }
 
-        private List<string> _notes = new List<string>();
+        private List<string> _notes;
 
         public string ReturnId { get; }
         public int Id { get; } //index id

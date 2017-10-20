@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Ploeh.AutoFixture;
-using Sales.Common;
-using Sales.Domain.Configuration;
-using Sales.Domain.Handlers;
-using Sales.Domain.Messages;
-using Sales.Tests.Configuration;
-using Should;
+﻿using AutoFixture;
+using AutoMapper;
+using SalesOrder.Common;
+using SalesOrder.Domain.Configuration;
+using SalesOrder.Domain.Handlers;
+using SalesOrder.Domain.Messages;
+using SalesOrder.Tests.Configuration;
+using Shouldly;
 
-namespace Sales.Tests.Tests
+namespace SalesOrder.Tests.Tests
 {
     public class UpdateSalesOrderStatusTest:Subject<SalesOrderHandler>
     {
@@ -31,7 +31,7 @@ namespace Sales.Tests.Tests
                 Status = SalesOrderStatus.Pending
             });
 
-            result.Status.ShouldEqual(SalesOrderStatus.Pending);
+            result.Status.ShouldBe(SalesOrderStatus.Pending);
         }
     }
 }

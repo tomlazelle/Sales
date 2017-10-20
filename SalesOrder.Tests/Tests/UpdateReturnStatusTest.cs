@@ -1,14 +1,14 @@
 ﻿using System.Linq;
+using AutoFixture;
 using AutoMapper;
-using Ploeh.AutoFixture;
-using Sales.Common;
-using Sales.Domain.Configuration;
-using Sales.Domain.Handlers;
-using Sales.Domain.Messages;
-using Sales.Tests.Configuration;
-using Should;
+using SalesOrder.Common;
+using SalesOrder.Domain.Configuration;
+using SalesOrder.Domain.Handlers;
+using SalesOrder.Domain.Messages;
+using SalesOrder.Tests.Configuration;
+using Shouldly;
 
-namespace Sales.Tests.Tests
+namespace SalesOrder.Tests.Tests
 {
     public class UpdateReturnStatusTest:Subject<SalesOrderHandler>
     {
@@ -44,7 +44,7 @@ namespace Sales.Tests.Tests
                 Status = ReturnStatus.Completed
             });
 
-            updatedSalesOrderClaim.Returns.First().Status.ShouldEqual(ReturnStatus.Completed);
+            updatedSalesOrderClaim.Returns.First().Status.ShouldBe(ReturnStatus.Completed);
         }
     }
 }

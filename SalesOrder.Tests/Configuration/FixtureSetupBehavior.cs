@@ -1,14 +1,14 @@
 ﻿using System;
+using AutoFixture.AutoNSubstitute;
 using Fixie;
-using Ploeh.AutoFixture.AutoNSubstitute;
 
-namespace Sales.Tests.Configuration
+namespace SalesOrder.Tests.Configuration
 {
     public class FixtureSetupBehavior : FixtureBehavior
     {
         public void Execute(Fixture context, Action next)
         {
-            var fixture = new Ploeh.AutoFixture.Fixture().Customize(new AutoNSubstituteCustomization());
+            var fixture = new AutoFixture.Fixture().Customize(new AutoNSubstituteCustomization());
 
             
             context.Instance.GetType().TryInvoke("FixtureSetup", context.Instance, new object[]

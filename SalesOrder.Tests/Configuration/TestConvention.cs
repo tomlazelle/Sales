@@ -2,7 +2,7 @@
 using System.Linq;
 using Fixie;
 
-namespace Sales.Tests.Configuration
+namespace SalesOrder.Tests.Configuration
 {
     public class TestConvention : Convention
     {

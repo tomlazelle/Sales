@@ -2,7 +2,7 @@
 using System.Reflection;
 using Fixie;
 
-namespace Sales.Tests.Configuration
+namespace SalesOrder.Tests.Configuration
 {
     public static class BehaviorBuilderExtensions
     {

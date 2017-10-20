@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sales.Common;
+using SalesOrder.Common;
 
-namespace Sales.Domain.Messages
+namespace SalesOrder.Domain.Messages
 {
     public class CreateSalesOrderMessage
     {

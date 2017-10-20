@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Linq;
 using SystemNotifications;
 using AutoMapper;
 using EventSource.Framework;
-using Sales.Common;
-using Sales.Domain.Aggregates;
-using Sales.Domain.Events;
-using Sales.Domain.Messages;
+using SalesOrder.Common;
+using SalesOrder.Domain.Events;
+using SalesOrder.Domain.Messages;
 
-namespace Sales.Domain.Handlers
+namespace SalesOrder.Domain.Handlers
 {
-    public class SalesOrderHandler : IMessageHandler<CreateSalesOrderMessage, SalesOrder>
+    public class SalesOrderHandler : IMessageHandler<CreateSalesOrderMessage, Aggregates.SalesOrder>
     {
         private IEventPublisher _eventPublisher;
         private readonly IMapper _mapper;
@@ -26,7 +24,7 @@ namespace Sales.Domain.Handlers
             _mapper = mapper;
         }
 
-        public SalesOrder Handle(CreateSalesOrderMessage message)
+        public Aggregates.SalesOrder Handle(CreateSalesOrderMessage message)
         {
             var salesOrderCreatedEvent = _mapper.Map<SalesOrderCreatedEvent>(message);
 
@@ -34,22 +32,22 @@ namespace Sales.Domain.Handlers
 
             _eventPublisher.Publish(new SalesOrderCreated());
 
-            return new SalesOrder(message.Id, events);
+            return new Aggregates.SalesOrder(message.Id, events);
         }
 
-        public SalesOrder Handle(UpdateSalesOrderStatusMessage updateSalesOrderStatusMessage)
+        public Aggregates.SalesOrder Handle(UpdateSalesOrderStatusMessage updateSalesOrderStatusMessage)
         {
             var events = _eventStore.AddEvent<SalesOrderEvents>(updateSalesOrderStatusMessage.Id,
                 new UpdateSalesOrderStatusEvent(updateSalesOrderStatusMessage.Id, updateSalesOrderStatusMessage.Status));
 
             _eventPublisher.Publish(new SalesOrderStatusChanged());
 
-            return new SalesOrder(updateSalesOrderStatusMessage.Id, events);
+            return new Aggregates.SalesOrder(updateSalesOrderStatusMessage.Id, events);
         }
 
-        public SalesOrder Handle(CreateReturnMessage createReturnMessage)
+        public Aggregates.SalesOrder Handle(CreateReturnMessage createReturnMessage)
         {
-            var salesOrder = new SalesOrder(createReturnMessage.Id, _eventStore.Get<SalesOrderEvents>(createReturnMessage.Id));
+            var salesOrder = new Aggregates.SalesOrder(createReturnMessage.Id, _eventStore.Get<SalesOrderEvents>(createReturnMessage.Id));
 
             var returnCnt = salesOrder.Returns.Count + 1;
 
@@ -67,10 +65,10 @@ namespace Sales.Domain.Handlers
 
             _eventPublisher.Publish(new CustomerReturnCreated());
 
-            return new SalesOrder(createReturnMessage.Id, events);
+            return new Aggregates.SalesOrder(createReturnMessage.Id, events);
         }
 
-        public SalesOrder Handle(UpdateReturnStatusMessage updateSalesOrderStatusMessage)
+        public Aggregates.SalesOrder Handle(UpdateReturnStatusMessage updateSalesOrderStatusMessage)
         {
             var events = _eventStore.AddEvent<SalesOrderEvents>(updateSalesOrderStatusMessage.Id,
                 new UpdateReturnStatusEvent(updateSalesOrderStatusMessage.Id, updateSalesOrderStatusMessage.Status,
@@ -78,16 +76,16 @@ namespace Sales.Domain.Handlers
 
             _eventPublisher.Publish(new ReturnStatusChanged());
 
-            return new SalesOrder(updateSalesOrderStatusMessage.Id, events);
+            return new Aggregates.SalesOrder(updateSalesOrderStatusMessage.Id, events);
         }
 
-        public SalesOrder Handle(AddReturnNoteMessage addReturnNoteMessage)
+        public Aggregates.SalesOrder Handle(AddReturnNoteMessage addReturnNoteMessage)
         {
             var events = _eventStore.AddEvent<SalesOrderEvents>(addReturnNoteMessage.Id,
                new AddReturnNoteEvent(addReturnNoteMessage.Id, addReturnNoteMessage.Note, addReturnNoteMessage.ReturnId));
 
             
-            return new SalesOrder(addReturnNoteMessage.Id, events);
+            return new Aggregates.SalesOrder(addReturnNoteMessage.Id, events);
         }
     }
 }

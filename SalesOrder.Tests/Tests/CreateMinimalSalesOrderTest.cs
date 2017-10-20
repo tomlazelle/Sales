@@ -1,13 +1,13 @@
 ﻿using System;
+using AutoFixture;
 using AutoMapper;
-using Ploeh.AutoFixture;
-using Sales.Domain.Configuration;
-using Sales.Domain.Handlers;
-using Sales.Domain.Messages;
-using Sales.Tests.Configuration;
-using Should;
+using SalesOrder.Domain.Configuration;
+using SalesOrder.Domain.Handlers;
+using SalesOrder.Domain.Messages;
+using SalesOrder.Tests.Configuration;
+using Shouldly;
 
-namespace Sales.Tests.Tests
+namespace SalesOrder.Tests.Tests
 {
     public class CreateMinimalSalesOrderTest:Subject<SalesOrderHandler>
     {
@@ -27,7 +27,7 @@ namespace Sales.Tests.Tests
 
             var result = Sut.Handle(message);
 
-            result.Id.ShouldEqual(message.Id);
+            result.Id.ShouldBe(message.Id);
         }
     }
 }

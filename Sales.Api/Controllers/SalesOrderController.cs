@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Http;
 using AutoMapper;
-using Sales.Api.Models;
-using Sales.Domain.Aggregates;
-using Sales.Domain.Handlers;
-using Sales.Domain.Messages;
+using Microsoft.AspNetCore.Mvc;
+using SalesOrder.Api.Models;
+using SalesOrder.Domain.Handlers;
+using SalesOrder.Domain.Messages;
 
 namespace Sales.Api.Controllers
 {
-    [RoutePrefix("v1/salesorder")]
-    public class SalesOrderController : ApiController
+    [Route("v1/salesorder")]
+    [Produces("application/json")]
+    public class SalesOrderController : Controller
     {
         private readonly SalesOrderHandler _handler;
         private readonly IMapper _mapper;
@@ -26,8 +26,9 @@ namespace Sales.Api.Controllers
             _mapper = mapper;
         }
 
-        [Route()]
-        public SalesOrderCreatedModel Post(CreateSalesOrderMessage createSalesOrderMessage)
+        [Route("")]
+        [HttpPost]
+        public SalesOrderCreatedModel Post([FromBody]CreateSalesOrderMessage createSalesOrderMessage)
         {
             if (createSalesOrderMessage.Id == Guid.Empty)
             {
@@ -43,22 +44,35 @@ namespace Sales.Api.Controllers
             };
         }
 
-        [Route]
+        [Route("")]
+        [HttpGet]
         public IEnumerable<SalesOrderModel> Get(int pageIndex, int itemsPerPage)
         {
             var salesOrders = _salesOrderQueryHandler.Get(pageIndex, itemsPerPage);
 
-            var result = _mapper.Map<IEnumerable<SalesOrder>, IEnumerable<SalesOrderModel>>(salesOrders);
+            var result = _mapper.Map<IEnumerable<SalesOrder.Domain.Aggregates.SalesOrder>, IEnumerable<SalesOrderModel>>(salesOrders);
 
             return result;
         }
 
         [Route("id")]
+        [HttpGet]
         public SalesOrderModel Get(Guid id)
         {
             var salesOrders = _salesOrderQueryHandler.Get(id);
 
-            var result = _mapper.Map<SalesOrder, SalesOrderModel>(salesOrders);
+            var result = _mapper.Map<SalesOrder.Domain.Aggregates.SalesOrder, SalesOrderModel>(salesOrders);
+
+            return result;
+        }
+
+        [Route("{id}/status")]
+        [HttpPut]
+        public SalesOrderModel Status(Guid id,[FromBody] UpdateReturnStatusMessage message)
+        {
+            var salesOrder = _handler.Handle(message);
+
+            var result = _mapper.Map<SalesOrder.Domain.Aggregates.SalesOrder, SalesOrderModel>(salesOrder);
 
             return result;
         }

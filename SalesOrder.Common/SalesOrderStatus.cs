@@ -1,10 +1,11 @@
-﻿namespace Sales.Common
+﻿namespace SalesOrder.Common
 {
     public enum SalesOrderStatus
     {
         Open,
-        Closed,
+        Complete,
         Pending,
-        Hold
+        InProcess,
+        Cancelled
     }
 }

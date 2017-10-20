@@ -1,18 +1,24 @@
-﻿using Sales.Common;
+﻿using Microsoft.Extensions.Options;
 
-namespace Sales.Domain.Configuration
+namespace SalesOrder.Domain.Configuration
 {
     public class RavenDbConnection : IRavenDbConnection
     {
-        public RavenDbConnection(IConfigMgr configManager)
+        public RavenDbConnection(IOptions<RavenDbSettings> settings)
         {
-            var environment = configManager.Get<string>("environment");
-
-            Url = configManager.Get<string>($"{environment}-raven-url");
-            DefaultDatabase = configManager.Get<string>($"{environment}-raven-default-database");
+            Url = settings.Value.Url;
+            DefaultDatabase = settings.Value.DefaultDatabase;
         }
 
         public string Url { get; set; }
+        public string DefaultDatabase { get; set; }
+    }
+
+    public class RavenDbSettings
+    {
+        [Newtonsoft.Json.JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "default-database")]
         public string DefaultDatabase { get; set; }
     }
 }

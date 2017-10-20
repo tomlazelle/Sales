@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using EventSource.Framework;
+using EventSource.Framework.EventStores;
 using Raven.Client;
 using Raven.Client.Converters;
 using Raven.Client.Document;
-using Sales.Common;
-using Sales.Domain.EventStores;
-using Sales.Domain.Handlers;
+using SalesOrder.Common;
+using SalesOrder.Domain.Handlers;
 using StructureMap;
 
-namespace Sales.Domain.Configuration
+namespace SalesOrder.Domain.Configuration
 {
     public class DomainRegistry : Registry
     {
+        
         public DomainRegistry()
         {
-            For<ITypeActivator>().Use<TypeActivator>();
+
             For<IRavenDbConnection>().Use<RavenDbConnection>();            
             ForConcreteType<SalesOrderHandler>();
             For<IEventStore>().Use<RavenDBEventStore>();

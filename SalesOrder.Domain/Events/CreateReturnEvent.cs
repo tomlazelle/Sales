@@ -1,8 +1,8 @@
 ﻿using System;
 using EventSource.Framework;
-using Sales.Common;
+using SalesOrder.Common;
 
-namespace Sales.Domain.Events
+namespace SalesOrder.Domain.Events
 {
     public class CreateReturnEvent:VersionedEvent<Guid>
     {

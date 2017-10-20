@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using EventSource.Framework;
-using Sales.Common;
-using Sales.Domain.Aggregates;
+using SalesOrder.Common;
+using SalesOrder.Domain.Aggregates;
 
-namespace Sales.Domain.Events
+namespace SalesOrder.Domain.Events
 {
     public class SalesOrderCreatedEvent : VersionedEvent<Guid>
     {

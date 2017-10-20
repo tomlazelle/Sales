@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoFixture;
+using AutoFixture.Kernel;
 using EventSource.Framework;
+using EventSource.Framework.EventStores;
+using Microsoft.Extensions.Options;
 using NSubstitute;
-using Ploeh.AutoFixture;
 using Raven.Client;
 using Raven.Client.Converters;
 using Raven.Client.Document;
-using Sales.Common;
-using Sales.Domain.EventStores;
+using SalesOrder.Domain.Configuration;
 
-namespace Sales.Tests.Configuration
+namespace SalesOrder.Tests.Configuration
 {
     public abstract class Subject<TClassUnderTest> : ISubjectBase
         where TClassUnderTest : class
@@ -30,8 +32,16 @@ namespace Sales.Tests.Configuration
         public virtual void FixtureSetup(IFixture fixture)
         {
             _fixture = fixture;
-            var configMgr = Substitute.For<IConfigMgr>();
-            configMgr.Get<string>("SalesDb").Returns("http://localhost:8080");
+
+            var configMgr = Substitute.For<IOptions<RavenDbSettings>>();
+            configMgr.Value.Returns(new RavenDbSettings
+            {
+                Url = "http://localhost:8080",
+                DefaultDatabase = "SalesDb"
+            })
+            ;
+
+            Register(new MockServiceProvider(_fixture));
             Register(configMgr);
         }
 
@@ -53,7 +63,7 @@ namespace Sales.Tests.Configuration
         {
             var _store = new DocumentStore
             {
-                Url = "http://localhost:8081/", // server URL
+                Url = "http://localhost:8080/", // server URL
                 DefaultDatabase = "EventSource",
                 //                RunInMemory = true,
             };
@@ -68,21 +78,26 @@ namespace Sales.Tests.Configuration
             };
 
             //            IndexCreation.CreateIndexes(typeof(Zip).Assembly, _store);
-           
 
-            Register(new TestActivator());
+
+
             Register<IDocumentStore>(_store);
-            Register<IEventStore>(new RavenDBEventStore(_store, new TestActivator()));
+            Register<IEventStore>(new RavenDBEventStore(_store, new MockServiceProvider(_fixture)));
         }
     }
 
-    public class TestActivator:ITypeActivator
+
+    public class MockServiceProvider : IServiceProvider
     {
-        public T Instance<T>()
+        private readonly IFixture _fixture;
+
+        public MockServiceProvider(IFixture fixture)
         {
-            return (T) Activator.CreateInstance(typeof(T));
+            _fixture = fixture;
+        }
+        public object GetService(Type serviceType)
+        {
+            return new SpecimenContext(_fixture).Resolve(serviceType);
         }
     }
-
-
 }

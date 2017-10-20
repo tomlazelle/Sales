@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.0.0-rc1" />
+    <PackageReference Include="Shouldly" Version="3.0.0-beta0003" />
+    <PackageReference Include="Fixie" Version="2.0.0-alpha-0002" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
+    <PackageReference Include="Fixie.Console" Version="2.0.0-alpha-0002" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SalesOrder.Api.Models\SalesOrder.Api.Models.csproj" />
+    <ProjectReference Include="..\SalesOrder.Common\SalesOrder.Common.csproj" />
+    <ProjectReference Include="..\SalesOrder.Domain\SalesOrder.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

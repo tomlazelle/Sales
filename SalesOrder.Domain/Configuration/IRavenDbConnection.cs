@@ -1,4 +1,4 @@
-﻿namespace Sales.Domain.Configuration
+﻿namespace SalesOrder.Domain.Configuration
 {
     public interface IRavenDbConnection
     {

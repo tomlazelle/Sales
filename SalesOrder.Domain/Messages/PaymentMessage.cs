@@ -1,7 +1,7 @@
 ﻿using System;
-using Sales.Common;
+using SalesOrder.Common;
 
-namespace Sales.Domain.Messages
+namespace SalesOrder.Domain.Messages
 {
     public class PaymentMessage
     {
@@ -9,5 +9,6 @@ namespace Sales.Domain.Messages
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public string PayeeName { get; set; }
+        public PaymentStatus Status { get; set; }
     }
 }

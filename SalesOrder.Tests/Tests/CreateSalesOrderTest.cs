@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Ploeh.AutoFixture;
-using Sales.Domain.Configuration;
-using Sales.Domain.Handlers;
-using Sales.Domain.Messages;
-using Sales.Tests.Configuration;
-using Should;
+﻿using AutoFixture;
+using AutoMapper;
+using SalesOrder.Domain.Configuration;
+using SalesOrder.Domain.Handlers;
+using SalesOrder.Domain.Messages;
+using SalesOrder.Tests.Configuration;
+using Shouldly;
 
-namespace Sales.Tests.Tests
+namespace SalesOrder.Tests.Tests
 {
     public class CreateSalesOrderTest:Subject<SalesOrderHandler>
     {
@@ -24,8 +24,8 @@ namespace Sales.Tests.Tests
 
             var salesOrder = Sut.Handle(createSalesOrder);
 
-            salesOrder.Id.ShouldEqual(createSalesOrder.Id);
-            salesOrder.Items.Count.ShouldEqual(createSalesOrder.Items.Count);
+            salesOrder.Id.ShouldBe(createSalesOrder.Id);
+            salesOrder.Items.Count.ShouldBe(createSalesOrder.Items.Count);
         }
     }
 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using EventSource.Framework;
-using Sales.Common;
-using Sales.Domain.Events;
-using Sales.Domain.Handlers;
+using SalesOrder.Common;
+using SalesOrder.Domain.Events;
+using SalesOrder.Domain.Handlers;
 
-namespace Sales.Domain.Aggregates
+namespace SalesOrder.Domain.Aggregates
 {
     public class SalesOrder : BaseEntity<Guid>
     {
@@ -82,7 +82,7 @@ namespace Sales.Domain.Aggregates
                 return _items.AsReadOnly();
             }
         }
-
+        public Payment Payment { get; private set; }
         public SalesOrderStatus Status { get; private set; }
         public SalesOrderTypes OrderType { get; private set; }
         public Guid RefNo { get; private set; }
@@ -141,6 +141,8 @@ namespace Sales.Domain.Aggregates
             DollarsOff = salesOrderCreatedEvent.DollarsOff;
             DiscountPercent = salesOrderCreatedEvent.DiscountPercent;
             Status = SalesOrderStatus.Open;
+            Payment = salesOrderCreatedEvent.PaymentData;
+
 
             _items = new List<OrderItem>();
 

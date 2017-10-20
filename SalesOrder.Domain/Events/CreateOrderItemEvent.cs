@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sales.Domain.Events
+namespace SalesOrder.Domain.Events
 {
     public class CreateOrderItemEvent
     {

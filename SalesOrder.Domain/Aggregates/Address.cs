@@ -1,4 +1,4 @@
-﻿namespace Sales.Domain.Aggregates
+﻿namespace SalesOrder.Domain.Aggregates
 {
     public class Address
     {

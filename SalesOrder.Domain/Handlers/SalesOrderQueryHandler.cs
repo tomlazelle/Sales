@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Raven.Client;
 using Raven.Client.Linq;
-using Sales.Domain.Aggregates;
 
-namespace Sales.Domain.Handlers
+namespace SalesOrder.Domain.Handlers
 {
     public class SalesOrderQueryHandler
     {
@@ -16,9 +15,9 @@ namespace Sales.Domain.Handlers
             _documentStore = documentStore;
         }
 
-        public IList<SalesOrder> Get(int pageIndex, int itemsPerPage)
+        public IList<Aggregates.SalesOrder> Get(int pageIndex, int itemsPerPage)
         {
-            IList<SalesOrder> salesOrders;
+            IList<Aggregates.SalesOrder> salesOrders;
 
             using (var session = _documentStore.OpenSession())
             {
@@ -31,20 +30,20 @@ namespace Sales.Domain.Handlers
                     .Skip((pageIndex - 1) * itemsPerPage)
                     .Take(itemsPerPage)
                     .ToList()
-                    .Select(x => new SalesOrder(x.Id, x))
+                    .Select(x => new Aggregates.SalesOrder(x.Id, x))
                     .ToList();
             }
 
             return salesOrders;
         }
 
-        public SalesOrder Get(Guid id)
+        public Aggregates.SalesOrder Get(Guid id)
         {
             using (var session = _documentStore.OpenSession())
             {
                 var events = session.Load<SalesOrderEvents>("SalesOrderEvents/" + id);
 
-                var salesOrder = new SalesOrder(id, events);
+                var salesOrder = new Aggregates.SalesOrder(id, events);
                 return salesOrder;
             }
         }

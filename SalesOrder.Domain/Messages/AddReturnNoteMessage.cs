@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sales.Domain.Messages
+namespace SalesOrder.Domain.Messages
 {
     public class AddReturnNoteMessage
     {

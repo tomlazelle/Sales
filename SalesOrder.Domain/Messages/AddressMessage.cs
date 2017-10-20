@@ -1,4 +1,4 @@
-﻿namespace Sales.Domain.Messages
+﻿namespace SalesOrder.Domain.Messages
 {
     public class AddressMessage
     {

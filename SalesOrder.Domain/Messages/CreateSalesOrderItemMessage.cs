@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sales.Domain.Messages
+namespace SalesOrder.Domain.Messages
 {
     public class CreateSalesOrderItemMessage
     {

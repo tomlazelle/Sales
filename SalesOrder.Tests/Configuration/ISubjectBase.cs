@@ -1,6 +1,6 @@
-using Ploeh.AutoFixture;
+using AutoFixture;
 
-namespace Sales.Tests.Configuration
+namespace SalesOrder.Tests.Configuration
 {
     public interface ISubjectBase
     {

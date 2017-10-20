@@ -1,7 +1,7 @@
 ﻿using System;
-using Sales.Common;
+using SalesOrder.Common;
 
-namespace Sales.Domain.Messages
+namespace SalesOrder.Domain.Messages
 {
     public class UpdateSalesOrderStatusMessage
     {
